@@ -1,3 +1,4 @@
+import logging
 import json
 
 from django.conf import settings
@@ -9,9 +10,17 @@ from django.template.loader import get_template
 from .forms import ContactForm
 
 
-RECIPIENT_EMAIL = settings.FORM_OWNER_EMAIL
-FROM_EMAIL = settings.EMAIL_HOST_USER
-EMAIL_CONFIGURED = settings.EMAIL_CONFIGURED
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
+try:
+    EMAIL_CONFIGURED = settings.EMAIL_CONFIGURED
+except AttributeError as e:
+    logger.warning(
+        'WARNING: emails will not be sent after form completion. Set '
+        'EMAIL_CONFIGURED to false in settings.py to disable this warning.'
+    )
+    EMAIL_CONFIGURED = False
 
 
 def email_form_content(name, email, phone, message):
@@ -26,25 +35,25 @@ def email_form_content(name, email, phone, message):
     content = template.render(context)
 
     email = EmailMessage(
-        subject=f"New contact form submission from {name}",
+        subject=f'New contact form submission from {name}',
         body=content,
-        from_email=FROM_EMAIL,
-        to=[RECIPIENT_EMAIL]
+        from_email=settings.EMAIL_HOST_USER,
+        to=[settings.FORM_OWNER_EMAIL]
     )
     email.send()
 
 
-def index(request):
+def contact(request):
     form_class = ContactForm
 
-    if request.method == "POST":
+    if request.method == 'POST':
         form = form_class(data=request.POST)
 
         if form.is_valid():
-            contact_name = request.POST.get("name", "")
-            contact_email = request.POST.get("email", "")
-            contact_phone = request.POST.get("phone", "")
-            contact_message = request.POST.get("message", "")
+            contact_name = request.POST.get('name', '')
+            contact_email = request.POST.get('email', '')
+            contact_phone = request.POST.get('phone', '')
+            contact_message = request.POST.get('message', '')
 
             if EMAIL_CONFIGURED:
                 email_form_content(
