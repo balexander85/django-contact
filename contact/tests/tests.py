@@ -84,7 +84,7 @@ class ContactFormTests(TestCase):
             {
                 'name': [
                     f'Ensure this value has at most 50 characters '
-                    f'(it has {too_long_name_data}).'
+                    f'(it has {len(too_long_name_data)}).'
                 ]
             }
         )
@@ -129,7 +129,7 @@ class ContactFormTests(TestCase):
             {
                 'email': [
                     f'Ensure this value has at most 50 characters '
-                    f'(it has len({too_long_email_data})).'
+                    f'(it has {len(too_long_email_data}}).'
                 ]
             }
         )
