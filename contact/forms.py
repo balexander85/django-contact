@@ -92,6 +92,7 @@ class ContactForm(forms.ModelForm):
         cleaned_data = super(ContactForm, self).clean()
         name = cleaned_data.get('name')
         email = cleaned_data.get('email')
+        return cleaned_data
 
     def send_email(self):
         """Email the profile with the contact information"""

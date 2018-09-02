@@ -1,31 +1,31 @@
 import json
 
 from django.contrib import messages
-from django.shortcuts import render
+from django.views.generic import FormView
 
 from .forms import ContactForm
 
 
-def contact(request):
+class ContactView(FormView):
     form_class = ContactForm
+    success_url = '/test/'
+    template_name = 'contact/index.html'
 
-    if request.method == 'POST':
-        form = form_class(data=request.POST)
+    def form_valid(self, form):
+        form.save()
+        form.send_email()
+        messages.success(self.request, form.SUCCESS_MESSAGE)
+        return super().form_valid(form)
 
-        if form.is_valid():
-            form.save()
-            messages.success(request, form.SUCCESS_MESSAGE)
-        else:
-            messages.error(
-                request,
-                [
-                    (k, v[0]['message']) for k, v
-                    in json.loads(form.errors.as_json()).items()
-                ]
-            )
-
-    return render(
-        request=request,
-        template_name='contact/index.html',
-        context={'form': form_class},
-    )
+    def form_invalid(self, form):
+        """If the form is invalid, render the invalid form."""
+        messages.error(
+            self.request,
+            [
+                (k, v[0]['message'])
+                for k, v in json.loads(form.errors.as_json()).items()
+            ]
+        )
+        return self.render_to_response(
+            self.get_context_data(request=self.request, form=form)
+        )
