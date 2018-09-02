@@ -1,3 +1,4 @@
+import logging
 
 from django import forms
 from django.conf import settings
@@ -5,6 +6,18 @@ from django.core.mail import EmailMessage
 from django.template.loader import get_template
 
 from .models import Contact
+
+
+logger = logging.getLogger(__name__)
+
+try:
+    EMAIL_CONFIGURED = settings.EMAIL_CONFIGURED
+except AttributeError as e:
+    logger.warning(
+        'WARNING: emails will not be sent after form completion. Set '
+        'EMAIL_CONFIGURED to false in settings.py to disable this warning.'
+    )
+    EMAIL_CONFIGURED = False
 
 
 class ContactForm(forms.ModelForm):
@@ -90,10 +103,11 @@ class ContactForm(forms.ModelForm):
         }
         content = template.render(context)
 
-        email = EmailMessage(
-            subject=f'New contact form submission from {self.name}',
-            body=content,
-            from_email=settings.EMAIL_HOST_USER,
-            to=[settings.FORM_OWNER_EMAIL]
-        )
-        email.send()
+        if EMAIL_CONFIGURED:
+            email = EmailMessage(
+                subject=f'New contact form submission from {self.name}',
+                body=content,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[settings.FORM_OWNER_EMAIL]
+            )
+            email.send()
