@@ -1,3 +1,8 @@
+{% if messages %}
+    {% for message in messages %}
+        <script>alert('{{ message }}'.replace(/&#39;/g, '"'));</script>
+    {% endfor %}
+{% endif %}
 <div>
     <form role="form" action="" method="post">
         {% csrf_token %}

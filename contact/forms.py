@@ -22,8 +22,9 @@ except AttributeError as e:
 
 class ContactForm(forms.ModelForm):
 
-    SUCCESS_MESSAGE = 'Thank you for reaching out.' \
-                      ' We will be in touch as soon as possible.'
+    SUCCESS_MESSAGE = (
+        'Thank you for reaching out. We will be in touch as soon as possible.'
+    )
 
     class Meta:
         model = Contact
