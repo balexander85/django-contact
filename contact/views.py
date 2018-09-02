@@ -8,7 +8,7 @@ from .forms import ContactForm
 
 class ContactView(FormView):
     form_class = ContactForm
-    success_url = '/test/'
+    success_url = '/'
     template_name = 'contact/index.html'
 
     def form_valid(self, form):
