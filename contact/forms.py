@@ -96,16 +96,16 @@ class ContactForm(forms.ModelForm):
 
     def send_email(self):
         """Email the profile with the contact information"""
-        template = get_template('contact/contact_template.txt')
-        context = {
-            'contact_name': self.name,
-            'contact_email': self.email,
-            'contact_phone': self.phone,
-            'contact_message': self.message,
-        }
-        content = template.render(context)
-
         if EMAIL_CONFIGURED:
+            template = get_template('contact/contact_template.txt')
+            context = {
+                'contact_name': self.fields['name'],
+                'contact_email': self.fields['email'],
+                'contact_phone': self.fields['phone'],
+                'contact_message': self.fields['message'],
+            }
+            content = template.render(context)
+
             email = EmailMessage(
                 subject=f'New contact form submission from {self.name}',
                 body=content,
