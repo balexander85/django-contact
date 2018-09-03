@@ -92,6 +92,8 @@ class ContactForm(forms.ModelForm):
         cleaned_data = super(ContactForm, self).clean()
         name = cleaned_data.get('name')
         email = cleaned_data.get('email')
+        phone = cleaned_data.get('phone')
+        message = cleaned_data.get('message')
         return cleaned_data
 
     def send_email(self):
@@ -101,8 +103,8 @@ class ContactForm(forms.ModelForm):
             context = {
                 'contact_name': self.cleaned_data.get('name'),
                 'contact_email': self.cleaned_data.get('email'),
-                'contact_phone': self.fields['phone'],
-                'contact_message': self.fields['message'],
+                'contact_phone': self.cleaned_data.get('phone'),
+                'contact_message': self.cleaned_data.get('message'),
             }
             content = template.render(context)
 
