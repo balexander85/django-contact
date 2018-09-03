@@ -99,8 +99,8 @@ class ContactForm(forms.ModelForm):
         if EMAIL_CONFIGURED:
             template = get_template('contact/contact_template.txt')
             context = {
-                'contact_name': self.fields['name'],
-                'contact_email': self.fields['email'],
+                'contact_name': self.cleaned_data.get('name'),
+                'contact_email': self.cleaned_data.get('email'),
                 'contact_phone': self.fields['phone'],
                 'contact_message': self.fields['message'],
             }
