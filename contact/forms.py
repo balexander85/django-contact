@@ -98,10 +98,11 @@ class ContactForm(forms.ModelForm):
 
     def send_email(self):
         """Email the profile with the contact information"""
+        contact_name = self.cleaned_data.get('name')
         if EMAIL_CONFIGURED:
             template = get_template('contact/contact_template.txt')
             context = {
-                'contact_name': self.cleaned_data.get('name'),
+                'contact_name': contact_name,
                 'contact_email': self.cleaned_data.get('email'),
                 'contact_phone': self.cleaned_data.get('phone'),
                 'contact_message': self.cleaned_data.get('message'),
@@ -109,7 +110,7 @@ class ContactForm(forms.ModelForm):
             content = template.render(context)
 
             email = EmailMessage(
-                subject=f'New form submission from {self.fields["name"]}',
+                subject=f'New form submission from {contact_name}',
                 body=content,
                 from_email=settings.EMAIL_HOST_USER,
                 to=[settings.FORM_OWNER_EMAIL]
