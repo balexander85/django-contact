@@ -83,8 +83,7 @@ class ContactFormTests(TestCase):
             form.errors,
             {
                 'name': [
-                    f'Ensure this value has at most 50 characters '
-                    f'(it has {len(too_long_name_data)}).'
+                    u'Ensure this value has at most 50 characters (it has 58).'
                 ]
             }
         )
@@ -132,7 +131,7 @@ class ContactFormTests(TestCase):
             form.errors,
             {
                 'email': [
-                    u'Ensure this value has at most 50 characters (it has {})'.format(too_long_email_data)
+                    u'Ensure this value has at most 50 characters (it has 60)'
                 ]
             },
             msg='Error message does not match expected output.'
