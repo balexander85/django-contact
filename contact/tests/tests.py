@@ -122,19 +122,23 @@ class ContactFormTests(TestCase):
         Verify valid data returns correct response.
         """
         form = ContactForm(too_long_email_data)
-        self.assertEqual(form.is_valid(), False)
-        self.assertEqual(form.is_bound, True)
+        self.assertEqual(
+            form.is_valid(), False, msg='Expected is_valid() to be False'
+        )
+        self.assertEqual(
+            form.is_bound, True, msg='Expected is_bound to be True'
+        )
         self.assertEqual(
             form.errors,
             {
                 'email': [
-                    f'Ensure this value has at most 50 characters '
-                    f'(it has {len(too_long_email_data)}).'
+                    u'Ensure this value has at most 50 characters (60 character limit)'
                 ]
-            }
+            },
+            msg='Error message does not match expected output.'
         )
-        self.assertEqual(form.data, too_long_email_data)
-        self.assertNotEqual(form.data, {})
+        self.assertEqual(form.data, too_long_email_data, msg='')
+        self.assertNotEqual(form.data, {}, msg='')
 
     def test_contact_form_with_no_email_data(self):
         """
