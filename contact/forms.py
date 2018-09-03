@@ -107,7 +107,7 @@ class ContactForm(forms.ModelForm):
             content = template.render(context)
 
             email = EmailMessage(
-                subject=f'New contact form submission from {self.name}',
+                subject=f'New form submission from {self.fields["name"]}',
                 body=content,
                 from_email=settings.EMAIL_HOST_USER,
                 to=[settings.FORM_OWNER_EMAIL]
