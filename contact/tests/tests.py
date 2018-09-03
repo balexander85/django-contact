@@ -131,7 +131,7 @@ class ContactFormTests(TestCase):
             form.errors,
             {
                 'email': [
-                    u'Ensure this value has at most 50 characters (it has 60)'
+                    u'Ensure this value has at most 50 characters (it has 60).'
                 ]
             },
             msg='Error message does not match expected output.'
