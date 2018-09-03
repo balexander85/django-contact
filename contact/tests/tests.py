@@ -132,7 +132,7 @@ class ContactFormTests(TestCase):
             form.errors,
             {
                 'email': [
-                    u'Ensure this value has at most 50 characters (60 character limit)'
+                    u'Ensure this value has at most 50 characters (it has {})'.format(too_long_email_data)
                 ]
             },
             msg='Error message does not match expected output.'
