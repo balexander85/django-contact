@@ -26,7 +26,7 @@ class ExportCsvMixin:
     export_as_csv.short_description = 'Export Selected'
 
 
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(admin.ModelAdmin, ExportCsvMixin):
     """Admin class for Contact app
 
         fieldsets are fields displayed on individual contact page
