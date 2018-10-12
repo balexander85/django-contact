@@ -32,6 +32,8 @@ class ContactAdmin(admin.ModelAdmin, ExportCsvMixin):
         fieldsets are fields displayed on individual contact page
         list_display are the fields displayed on the list of contacts
     """
+    actions = ['export_as_csv']
+
     fieldsets = [
         (
             'Contact',
