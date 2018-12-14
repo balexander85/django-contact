@@ -10,6 +10,10 @@ from .models import Contact, ContactAdmins
 
 logger = logging.getLogger(__name__)
 
+SUCCESS_MESSAGE = (
+    'Thank you for reaching out. We will be in touch as soon as possible.'
+)
+
 try:
     EMAIL_CONFIGURED = settings.EMAIL_CONFIGURED
     CONTACT_ADMIN_LIST = [x.email for x in ContactAdmins.objects.all()]
@@ -22,10 +26,6 @@ except AttributeError as e:
 
 
 class ContactForm(forms.ModelForm):
-
-    SUCCESS_MESSAGE = (
-        'Thank you for reaching out. We will be in touch as soon as possible.'
-    )
 
     class Meta:
         model = Contact

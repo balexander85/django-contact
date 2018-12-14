@@ -1,12 +1,7 @@
 from django.test import TestCase
 
 from .contact_forms import *
-from contact.forms import ContactForm
-
-
-SUCCESS_MESSAGE = (
-    'Thank you for reaching out. We will be in touch as soon as possible.'
-)
+from contact.forms import ContactForm, SUCCESS_MESSAGE
 
 
 class ContactFormTests(TestCase):

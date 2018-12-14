@@ -3,7 +3,7 @@ import json
 from django.contrib import messages
 from django.views.generic import FormView
 
-from .forms import ContactForm
+from .forms import ContactForm, SUCCESS_MESSAGE
 
 
 class ContactView(FormView):
@@ -14,7 +14,7 @@ class ContactView(FormView):
     def form_valid(self, form):
         form.save()
         form.send_email()
-        messages.success(self.request, form.SUCCESS_MESSAGE)
+        messages.success(self.request, SUCCESS_MESSAGE)
         return super().form_valid(form)
 
     def form_invalid(self, form):
