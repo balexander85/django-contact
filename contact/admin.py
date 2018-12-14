@@ -1,9 +1,9 @@
 import csv
 
-from django.http import HttpResponse
 from django.contrib import admin
+from django.http import HttpResponse
 
-from .models import Contact
+from .models import Contact, ContactAdmins
 
 
 class ExportCsvMixin:
@@ -60,4 +60,12 @@ class ContactAdmin(admin.ModelAdmin, ExportCsvMixin):
     search_fields = ['name']
 
 
+class ContactAdminsAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'email',
+    )
+
+
 admin.site.register(Contact, ContactAdmin)
+admin.site.register(ContactAdmins, ContactAdminsAdmin)

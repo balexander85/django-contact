@@ -5,13 +5,14 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
 
-from .models import Contact
+from .models import Contact, ContactAdmins
 
 
 logger = logging.getLogger(__name__)
 
 try:
     EMAIL_CONFIGURED = settings.EMAIL_CONFIGURED
+    CONTACT_ADMIN_LIST = [x.email for x in ContactAdmins.objects.all()]
 except AttributeError as e:
     logger.warning(
         'WARNING: emails will not be sent after form completion. Set '
@@ -113,6 +114,6 @@ class ContactForm(forms.ModelForm):
                 subject=f'New form submission from {contact_name}',
                 body=content,
                 from_email=settings.EMAIL_HOST_USER,
-                to=[settings.FORM_OWNER_EMAIL]
+                to=CONTACT_ADMIN_LIST
             )
             email.send()

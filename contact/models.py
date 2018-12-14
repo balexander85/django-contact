@@ -15,3 +15,14 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ContactAdmins(models.Model):
+    email = models.EmailField(max_length=50, blank=False)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = u'Contact Administrator'
+        verbose_name_plural = u'Contact Administrators'
