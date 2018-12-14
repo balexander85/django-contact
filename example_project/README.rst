@@ -29,8 +29,8 @@ Clone this code into your project folder::
 Create a virtual python environment for the project. The use of pyenv
 is strongly recommended::
 
-	cd django-contact/example_project
 	pyenv virtualenv -v 3.*.* contact-env
+	cd django-contact
 	pyenv local contact-env
 
 
@@ -39,6 +39,7 @@ probably want instead to fork the project on Github, and clone your fork instead
 
 Install requirements::
 
+	cd example_project
 	pip install -r requirements.txt
 
 **Note**: this will install Django library.
