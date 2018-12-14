@@ -16,7 +16,6 @@ SUCCESS_MESSAGE = (
 
 try:
     EMAIL_CONFIGURED = settings.EMAIL_CONFIGURED
-    CONTACT_ADMIN_LIST = [x.email for x in ContactAdmins.objects.all()]
 except AttributeError as e:
     logger.warning(
         'WARNING: emails will not be sent after form completion. Set '
@@ -101,6 +100,7 @@ class ContactForm(forms.ModelForm):
         """Email the profile with the contact information"""
         contact_name = self.cleaned_data.get('name')
         if EMAIL_CONFIGURED:
+            CONTACT_ADMIN_LIST = [x.email for x in ContactAdmins.objects.all()]
             template = get_template('contact/contact_template.txt')
             context = {
                 'contact_name': contact_name,
