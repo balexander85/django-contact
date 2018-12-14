@@ -60,7 +60,7 @@ Open browser to http://127.0.0.1:8000
 
 Thank you
 =========
-This example project is based on the `contact_demo project <https://github.com/balexander85/django-contact/tree/master/example_project>`_.
+This example project is based on the `jdriscoll's version photologue_demo project <https://github.com/jdriscoll/django-photologue/tree/master/example_project>`_, which was based on the earlier `photologue_demo project <https://github.com/richardbarran/photologue_demo>`_.
 
 
 ..
