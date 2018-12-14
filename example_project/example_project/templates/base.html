@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Django Starter Project | {% block head_title %}title{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load staticfiles %}
+        <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon">
+        {% load static %}
+        <!--Download W3.CSS from this link: https://www.w3schools.com/w3css/4/w3.css-->
+        <link rel="stylesheet" type="text/css" href="{% static '/css/w3.css' %}">
+        <script src="{% static '/scripts/drop_down_menu.js' %}"></script>
+    </head>
+    <body>
+        {% block content %}
+
+        {% endblock %}
+        {% include "footer.html" %}
+    </body>
+</html>

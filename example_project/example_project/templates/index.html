@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head_title %}Index.html Page{% endblock %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <script>alert('{{ message }}'.replace(/&#39;/g, '"'));</script>
+        {% endfor %}
+    {% endif %}
+    <h1>HELLO WORLD</h1>
+    <form method="post" class="w3-display-middle" style="max-width:800px">
+        {% csrf_token %}
+        <div style="margin:0 -16px 8px -16px">{{ form.as_p }}</div>
+        <button id="submit-contact-form" class="w3-button w3-light-grey w3-section w3-right">SEND</button>
+    </form>
+{% endblock %}
