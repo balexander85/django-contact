@@ -100,7 +100,7 @@ class ContactForm(forms.ModelForm):
         """Email the profile with the contact information"""
         contact_name = self.cleaned_data.get('name')
         if EMAIL_CONFIGURED:
-            CONTACT_ADMIN_LIST = [x.email for x in ContactAdmins.objects.all()]
+            contact_admin_list = [x.email for x in ContactAdmins.objects.all()]
             template = get_template('contact/contact_template.txt')
             context = {
                 'contact_name': contact_name,
@@ -114,6 +114,6 @@ class ContactForm(forms.ModelForm):
                 subject=f'New form submission from {contact_name}',
                 body=content,
                 from_email=settings.EMAIL_HOST_USER,
-                to=CONTACT_ADMIN_LIST
+                to=contact_admin_list
             )
             email.send()
