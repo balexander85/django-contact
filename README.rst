@@ -20,10 +20,10 @@ Quick start
 
 #. Add following to urls.py::
 
-    from contact.views import index as contact
+    from contact.views import ContactView
 
     urlpatterns = [
-    path('contact/', contact),
+    path('contact/', ContactView.as_view(), name='index'),
     ...
     ]
 
