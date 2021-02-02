@@ -7,10 +7,14 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% load staticfiles %}
+        {% load static %}
         <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon">
         <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon">
-        {% load static %}
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static '/site.webmanifest' %}">
+
         <!--Download W3.CSS from this link: https://www.w3schools.com/w3css/4/w3.css-->
         <link rel="stylesheet" type="text/css" href="{% static '/css/w3.css' %}">
         <script src="{% static '/scripts/drop_down_menu.js' %}"></script>

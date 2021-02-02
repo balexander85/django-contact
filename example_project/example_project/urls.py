@@ -19,6 +19,6 @@ from django.urls import path
 from contact.views import ContactView
 
 urlpatterns = [
-    path('', ContactView.as_view(template_name='index.html'), name='index'),
-    path('admin/', admin.site.urls),
+    path("", ContactView.as_view(template_name="index.html"), name="index"),
+    path("admin/", admin.site.urls),
 ]

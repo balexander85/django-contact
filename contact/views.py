@@ -8,8 +8,8 @@ from .forms import ContactForm, SUCCESS_MESSAGE
 
 class ContactView(FormView):
     form_class = ContactForm
-    success_url = '/'
-    template_name = 'contact/index.html'
+    success_url = "/"
+    template_name = "contact/index.html"
 
     def form_valid(self, form):
         form.save()
@@ -22,9 +22,9 @@ class ContactView(FormView):
         messages.error(
             self.request,
             [
-                (k, v[0]['message'])
+                (k, v[0]["message"])
                 for k, v in json.loads(form.errors.as_json()).items()
-            ]
+            ],
         )
         return self.render_to_response(
             self.get_context_data(request=self.request, form=form)

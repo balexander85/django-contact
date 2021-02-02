@@ -1,1 +1,1 @@
-PROJECT_NAME = 'example_project'
+PROJECT_NAME = "example_project"

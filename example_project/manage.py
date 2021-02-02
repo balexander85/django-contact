@@ -2,8 +2,8 @@
 import os
 import sys
 
-if __name__ == '__main__':
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'example_project.settings')
+if __name__ == "__main__":
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "example_project.settings")
     # Add parent folder to path so that we can import Contact itself.
     PROJECT_PATH = os.path.abspath(os.path.split(__file__)[0])
     sys.path.append(os.path.join(PROJECT_PATH, ".."))
